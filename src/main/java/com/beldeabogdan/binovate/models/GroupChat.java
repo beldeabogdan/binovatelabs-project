@@ -42,6 +42,13 @@ public class GroupChat {
     @JsonIgnore
     private Set<Message> messages = new HashSet<>();
 
+    @Column(
+            name = "title",
+            nullable = true
+    )
+    @JsonProperty("title")
+    private String title;
+
     public Integer getId() {
         return id;
     }

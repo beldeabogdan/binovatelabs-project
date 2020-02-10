@@ -3,15 +3,12 @@ package com.beldeabogdan.binovate.services;
 import com.beldeabogdan.binovate.factories.ErrorResponseFactory;
 import com.beldeabogdan.binovate.models.User;
 import com.beldeabogdan.binovate.repositories.UserRepository;
-import com.beldeabogdan.binovate.utils.StringIdParser;
+import com.beldeabogdan.binovate.utils.IntegerParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.Optional;
 
@@ -44,7 +41,7 @@ public class UserService {
     }
 
     public User findById(@NonNull String idString) {
-        final int id = StringIdParser.parse(idString);
+        final int id = IntegerParser.parse(idString);
 
         return findById(id);
     }

@@ -4,7 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 
-public class StringIdParser {
+public class IntegerParser {
     public static Integer parse(String s) {
         if (null == s) {
             throw HttpClientErrorException.create(

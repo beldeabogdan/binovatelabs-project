@@ -1,18 +1,15 @@
 package com.beldeabogdan.binovate.controllers;
 
 
-import com.beldeabogdan.binovate.factories.ErrorResponseFactory;
 import com.beldeabogdan.binovate.models.User;
 import com.beldeabogdan.binovate.services.UserService;
+import com.beldeabogdan.binovate.utils.IntegerParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/v1/user")
 public class UserController {
 
     private final UserService userService;
@@ -32,17 +29,8 @@ public class UserController {
             @RequestParam(value = "page", defaultValue = "0") String pageString,
             @RequestParam(value = "itemsPerPage", defaultValue = "50") String itemsPerPageString
     ) {
-        int page;
-        int itemsPerPage;
-        try {
-            page = Integer.parseInt(pageString);
-            itemsPerPage = Integer.parseInt(itemsPerPageString);
-        } catch (NumberFormatException e) {
-            throw ErrorResponseFactory.generic(
-                    HttpStatus.UNPROCESSABLE_ENTITY,
-                    "Query params page and itemsPerPage should be positive integers"
-            );
-        }
+        int page = IntegerParser.parse(pageString);
+        int itemsPerPage = IntegerParser.parse(itemsPerPageString);
 
         return userService.findAll(page, itemsPerPage);
     }

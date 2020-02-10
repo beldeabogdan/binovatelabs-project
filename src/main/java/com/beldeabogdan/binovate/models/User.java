@@ -22,7 +22,7 @@ public class User {
     private Integer id;
 
     @Column(name = "name")
-    @JsonProperty("mame")
+    @JsonProperty("name")
     private String name;
 
     public Integer getId() {
